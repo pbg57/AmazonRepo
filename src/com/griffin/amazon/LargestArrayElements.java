@@ -9,18 +9,21 @@ import java.util.stream.Collectors;
 
 public class LargestArrayElements {
 
+    /*
+    Write a class that takes an input array of integers, orders them and returns
+    a sub list of the largest K values.
+     */
     public static void main( String [] args) throws LearnException {
 
         LargestArrayElements largestArrayElements =  new LargestArrayElements();
 
         int [] inputArray = new int[] {3,5,4,6,5,7,8};
-        int size = inputArray.length;
 
         List<Integer> returnList = largestArrayElements.runTests(inputArray, 5);
         System.out.println("Return List: " + returnList);
 
-        largestArrayElements.runTests(inputArray,10);
-
+        returnList = largestArrayElements.runTests(inputArray,7);
+        System.out.println("Return List: " + returnList);
     }
 
     public List<Integer> runTests(int [] intArray, int K) throws LearnException {
@@ -29,13 +32,14 @@ public class LargestArrayElements {
             throw new LearnException("K is larger than array");
 
         // Given an unsorted array, find the largest K elements.
-
         List<Integer> intList = Arrays.stream(intArray).boxed().toList();
 
         // Note: must use mutable ArrayList in order to call sort() method.
         ArrayList<Integer> intArrayList = new ArrayList<>(intList);
 
-        List<Integer> intList1 = Arrays.stream(intArray).boxed().collect(Collectors.toList());
+//        List<Integer> intList1 = Arrays.stream(intArray).boxed().collect(Collectors.toList());
+        List<Integer> intList1 = Arrays.stream(intArray).boxed().toList();
+
 
         System.out.println("List: " + intList);
         System.out.println("List: " + intList1);
@@ -43,9 +47,7 @@ public class LargestArrayElements {
         intArrayList.sort(null);
         System.out.println("List: " + intArrayList);
 
-
-        List<Integer> returnList = intArrayList.subList(intArrayList.size()-K, intArrayList.size());
-
-        return returnList;
+        // Return sub-list of largest K items.
+        return intArrayList.subList(intArrayList.size()-K, intArrayList.size());
     }
 }
